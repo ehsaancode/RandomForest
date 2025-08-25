@@ -1,0 +1,118 @@
+import React, { useState } from 'react';
+
+const AuthPage = ({ setIsLoggedIn }) => {
+  const [isRegister, setIsRegister] = useState(false); // toggle form
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setErrorMsg('');
+    try {
+      const res = await fetch('http://localhost:4000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem('token', data.token);
+        setIsLoggedIn(true);
+      } else {
+        setErrorMsg(data.message || data.error || 'Login failed');
+      }
+    } catch (err) {
+        console.log(err)
+      setErrorMsg('Server error' + err.message);
+    }
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setErrorMsg('');
+    setSuccessMsg('');
+    try {
+      const res = await fetch('http://localhost:4000/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setSuccessMsg('Registration successful! You can now login.');
+        setEmail('');
+        setPassword('');
+        setIsRegister(false);
+      } else {
+        setErrorMsg(data.message || 'Registration failed');
+      }
+    } catch (err) {
+      setErrorMsg('Server error');
+    }
+  };
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white shadow-md rounded px-8 py-10 w-full max-w-sm">
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+          {isRegister ? 'Register' : 'Login'}
+        </h2>
+
+        <form onSubmit={isRegister ? handleRegister : handleLogin}>
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-1">Email</label>
+            <input
+              type="email"
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
+              placeholder="Enter your email"
+              value={email}
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-1">Password</label>
+            <input
+              type="password"
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
+              placeholder="Enter your password"
+              value={password}
+              required
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          {errorMsg && <p className="text-red-500 text-sm mb-4">{errorMsg}</p>}
+          {successMsg && <p className="text-green-500 text-sm mb-4">{successMsg}</p>}
+
+          <button
+            type="submit"
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded transition"
+          >
+            {isRegister ? 'Register' : 'Login'}
+          </button>
+        </form>
+
+        <p className="text-center mt-4 text-gray-600">
+          {isRegister ? 'Already have an account?' : "Don't have an account?"}{' '}
+          <button
+            className="text-purple-600 hover:underline font-semibold"
+            onClick={() => {
+              setErrorMsg('');
+              setSuccessMsg('');
+              setIsRegister(!isRegister);
+            }}
+          >
+            {isRegister ? 'Login' : 'Register'}
+          </button>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default AuthPage;
