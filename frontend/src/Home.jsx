@@ -3,7 +3,7 @@ import Hero from './Hero';
 
 const Home = () => {
   return (
-    <div className='bg-linear-to-br from-white from-30% to-pink-100 to-90% pt-16'>
+    <div className='bg-linear-to-tr from-white from-70% to-pink-100 to-90% pt-16'>
         <div className='flex flex-row gap-3 justify-center'>
             <img className='w-25' src="https://unicorn-images.b-cdn.net/467e23f7-778c-4586-bafc-bf0c86bba7a5" alt="" />
             <img className='w-25' src="https://unicorn-images.b-cdn.net/702e79dc-32cf-4790-a6e4-e1053feddb00" alt="" />
