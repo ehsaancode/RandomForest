@@ -4,12 +4,12 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 px-8 py-12">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8">
-        <div>
+        <div className='text-gray-400'>
           <img className='w-8 pb-4' src="https://unicorn-images.b-cdn.net/7dcabea3-9657-4d11-9487-f7444d349c9d?optimizer=gif" alt="" />
-          <p className="text-sm mb-2">Unicorn Platform is an easy-to-use website builder for busy founders.</p>
+          <p className="text-sm mb-2">Unicorn Platform is an easy-to-use website builder for busy founders.</p> <br />
           <p className="text-sm">
             We are a part of the MarsX dev community.
-          </p>
+          </p> <br />
           <p className="text-sm mt-2">Led by @johnrushx</p>
         </div>
 
@@ -89,7 +89,7 @@ const Footer = () => {
       <div className="mt-12 border-t border-gray-700 pt-6 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-500">
         
         <div>
-          <button className="bg-transparent border border-gray-500 text-gray-300 px-4 py-2 rounded hover:bg-gray-700 transition">
+          <button className="bg-transparent border border-b-white text-white px-4 py-2 rounded-xl hover:bg-gray-700 transition">
             Create free website
           </button>
         </div>
