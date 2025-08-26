@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './Navbar';
 import Home from './Home';
 import Login from './Login';
+import Launch from './Launch';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,6 +25,7 @@ function App() {
         <>
           <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
           <Home />
+          <Launch/>
         </>
       ) : (
         <Login setIsLoggedIn={setIsLoggedIn} />
