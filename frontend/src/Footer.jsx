@@ -79,8 +79,8 @@ const Footer = () => {
       <div className="mb-4 sm:mb-0">
           <p className='font-bold'>Say 'hi'</p>
           <div className='flex flex-row w-4 pt-4 gap-3 pl-0'>
-            <img className='filter brightness-0 invert' src="https://cdn.unicornplatform.com/static/img/icons/social/color/facebook-only-letter.svg" alt="" />
             <img className='filter brightness-0 invert' src="https://cdn.unicornplatform.com/static/img/icons/social/color/instagram.svg" alt="" />
+            <img className='filter brightness-0 invert' src="https://cdn.unicornplatform.com/static/img/icons/social/color/facebook-only-letter.svg" alt="" />
             <img className='filter brightness-0 invert' src="https://cdn.unicornplatform.com/static/img/icons/social/color/product-hunt.svg" alt="" />
             <img className='filter brightness-0 invert' src="https://cdn.unicornplatform.com/static/img/icons/social/color/ih.svg" alt="" />
           </div>
