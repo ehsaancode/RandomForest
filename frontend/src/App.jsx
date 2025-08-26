@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Home from './Home';
 import Login from './Login';
 import Launch from './Launch';
+import Footer from './Footer';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,6 +27,7 @@ function App() {
           <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
           <Home />
           <Launch/>
+          <Footer/>
         </>
       ) : (
         <Login setIsLoggedIn={setIsLoggedIn} />
