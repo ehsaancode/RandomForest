@@ -12,7 +12,7 @@ const Launch = () => {
         </p>
       </div>
       <button className="border border-amber-50 p-8 text-3xl text-black rounded-2xl mt-8 bg-white font-semibold hover:bg-gray-200 transition">
-        Start Now
+        Launch Now!
       </button>
     </div>
   );
