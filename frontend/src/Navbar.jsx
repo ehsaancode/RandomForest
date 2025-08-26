@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navbar = ({ isLoggedIn, handleLogout }) => {
   return (
-    <header className="w-full bg-white py-4 px-6 shadow-black shadow-md">
+    <header className="w-full bg-white/50 py-4 px-6 shadow shadow-gray-100 sticky top-0 z-1 backdrop-blur-lg">
       <nav className="max-w-7xl mx-auto flex items-center justify-between ">
 
         <div className="flex items-center space-x-3">
