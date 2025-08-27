@@ -1,10 +1,19 @@
 import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Navbar = ({ isLoggedIn, handleLogout }) => {
+  const { logout: auth0Logout, isAuthenticated } = useAuth0();
+
+  const onLogoutClick = () => {
+    handleLogout()
+    if (isAuthenticated) {
+      auth0Logout({ logoutParams: { returnTo: window.location.origin } });
+    }
+  };
+
   return (
     <header className="w-full bg-white/50 py-4 px-6 shadow shadow-gray-100 sticky top-0 z-1 backdrop-blur-lg">
       <nav className="max-w-7xl mx-auto flex items-center justify-between ">
-
         <div className="flex items-center space-x-3">
           <img
             className="w-10 h-10"
@@ -22,20 +31,14 @@ const Navbar = ({ isLoggedIn, handleLogout }) => {
               Pricing
             </a>
           </li>
-          
+
           <li>
             {isLoggedIn ? (
-              <button
-                onClick={handleLogout}
-                className="text-sm font-medium text-black hover:text-purple-700 transition"
-              >
+              <button onClick={onLogoutClick} className="text-sm font-medium text-black hover:text-purple-700 transition">
                 Logout
               </button>
             ) : (
-              <a
-                href="/login"
-                className="text-sm font-medium text-black hover:text-purple-700 transition"
-              >
+              <a href="/login" className="text-sm font-medium text-black hover:text-purple-700 transition">
                 Sign in
               </a>
             )}

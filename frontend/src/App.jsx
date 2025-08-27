@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+
 import './App.css';
 import Navbar from './Navbar';
 import Home from './Home';
@@ -8,26 +10,30 @@ import Footer from './Footer';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { logout, isAuthenticated } = useAuth0();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
   }, []);
 
-  // Logout function
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
+
+    if (isAuthenticated) {
+      logout({ logoutParams: { returnTo: window.location.origin } });
+    }
   };
 
   return (
-    <div className='randomf'>
+    <div className=''>
       {isLoggedIn ? (
         <>
           <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
           <Home />
-          <Launch/>
-          <Footer/>
+          <Launch />
+          <Footer />
         </>
       ) : (
         <Login setIsLoggedIn={setIsLoggedIn} />

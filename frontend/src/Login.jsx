@@ -1,11 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const AuthPage = ({ setIsLoggedIn }) => {
-  const [isRegister, setIsRegister] = useState(false); // toggle form
+  const {
+    loginWithRedirect,
+    isAuthenticated,
+    user,
+  } = useAuth0();
+
+  const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+
+  // Set localStorage and isLoggedIn when Auth0 login succeeds
+  useEffect(() => {
+    const handleAuth0Login = async () => {
+      if (isAuthenticated && user?.email) {
+        try {
+          // Send Auth0 user info to backend for account creation
+          const res = await fetch('http://localhost:4000/api/auth/auth0', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: user.email }),
+          });
+          const data = await res.json();
+
+          if (res.ok && data.token) {
+            localStorage.setItem('token', data.token);
+            setIsLoggedIn(true);
+          } else {
+            setErrorMsg(data.message || 'Auth0 login failed');
+          }
+        } catch (err) {
+          console.error(err);
+          setErrorMsg('Server error during Auth0 login');
+        }
+      }
+    };
+
+    handleAuth0Login();
+  }, [isAuthenticated, user, setIsLoggedIn]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,8 +61,8 @@ const AuthPage = ({ setIsLoggedIn }) => {
         setErrorMsg(data.message || data.error || 'Login failed');
       }
     } catch (err) {
-        console.log(err)
-      setErrorMsg('Server error' + err.message);
+      console.error(err);
+      setErrorMsg('Server error: ' + err.message);
     }
   };
 
@@ -110,6 +146,16 @@ const AuthPage = ({ setIsLoggedIn }) => {
             {isRegister ? 'Login' : 'Register'}
           </button>
         </p>
+
+        <div className="mt-6 text-center">
+          <p className="text-gray-500 mb-2">Or</p>
+          <button
+            onClick={() => loginWithRedirect()}
+            className="w-full border border-purple-600 text-purple-600 font-semibold py-2 rounded hover:bg-purple-50 transition"
+          >
+            Login with Google
+          </button>
+        </div>
       </div>
     </div>
   );

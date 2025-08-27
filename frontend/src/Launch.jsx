@@ -11,7 +11,7 @@ const Launch = () => {
           Get your website up and running in minutes
         </p>
       </div>
-      <button className="border border-amber-50 p-8 text-3xl text-black rounded-2xl mt-8 bg-white font-semibold hover:bg-gray-200 transition">
+      <button className="border backdrop-blur-lg border-amber-50 p-8 text-3xl text-black rounded-4xl px-20 py-10 mt-8 shadow-inner/40 shadow-white bg-white/80 font-semibold hover:shadow-xl hover:bg-gray-200 transition-shadow duration-300 ease-in-out hover:text-purple-600">
         Launch Now!
       </button>
     </div>
