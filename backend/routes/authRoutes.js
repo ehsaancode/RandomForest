@@ -13,7 +13,7 @@ function generateToken(userId) {
 router.post('/register', register);
 router.post('/login', login);
 
-app.get('/', (req, res) => {
+router.get('/', (req, res) => {
   res.send('Backend is running successfully');
 });
 
