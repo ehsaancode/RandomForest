@@ -12,7 +12,7 @@ const app = express();
 
 const allowedOrigins = [
   'http://localhost:5176',
-  'https://unicorn-qiy4sw3s2-ehsaancodes-projects.vercel.app'  // Your Vercel frontend
+  'https://unicorn-lj6anbier-ehsaancodes-projects.vercel.app'  // Your Vercel frontend
 ];
 
 app.use(cors({
