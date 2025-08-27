@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-
-//add backend API
-const API_BASE_URL = import.meta.env.VITE_API_URL;
-
 const AuthPage = ({ setIsLoggedIn }) => {
   const {
     loginWithRedirect,
@@ -24,7 +20,7 @@ const AuthPage = ({ setIsLoggedIn }) => {
       if (isAuthenticated && user?.email) {
         try {
           // Send Auth0 user info to backend for account creation
-          const res = await fetch(`${API_BASE_URL}/api/auth/auth0`, {
+          const res = await fetch('http://localhost:4000/api/auth/auth0', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: user.email }),
@@ -51,7 +47,7 @@ const AuthPage = ({ setIsLoggedIn }) => {
     e.preventDefault();
     setErrorMsg('');
     try {
-      const res = await fetch( `${API_BASE_URL}/api/auth/login`, {
+      const res = await fetch('http://localhost:4000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -75,7 +71,7 @@ const AuthPage = ({ setIsLoggedIn }) => {
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
+      const res = await fetch('http://localhost:4000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

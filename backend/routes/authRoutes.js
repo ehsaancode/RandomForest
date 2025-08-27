@@ -13,9 +13,6 @@ function generateToken(userId) {
 router.post('/register', register);
 router.post('/login', login);
 
-router.get('/', (req, res) => {
-  res.send('Backend is running successfully');
-});
 
 // POST /api/auth/auth0
 router.post('/auth0', async (req, res) => {

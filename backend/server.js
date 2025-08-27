@@ -8,17 +8,7 @@ const connectDB = require('./config/db');
 dotenv.config();
 
 const app = express();
-// app.use(cors({ origin: 'http://localhost:5176', credentials: true }));
-
-const allowedOrigins = [
-  'http://localhost:5176',
-  'https://unicorn-lj6anbier-ehsaancodes-projects.vercel.app'  // Your Vercel frontend
-];
-
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-}));
+app.use(cors({ origin: 'http://localhost:5176', credentials: true }));
 
 app.use(express.json());
 app.use('/api/auth', authRoutes);
