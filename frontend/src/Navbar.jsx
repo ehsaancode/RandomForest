@@ -1,15 +1,19 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
-const Navbar = ({ isLoggedIn, handleLogout }) => {
+
+
+const Navbar = ({ handleLogout, isLoggedIn }) => {
+  
   const { logout: auth0Logout, isAuthenticated } = useAuth0();
 
   const onLogoutClick = () => {
-    handleLogout()
-    if (isAuthenticated) {
-      auth0Logout({ logoutParams: { returnTo: window.location.origin } });
-    }
-  };
+  if (isAuthenticated) {
+    auth0Logout({ logoutParams: { returnTo: window.location.origin } });
+    return;
+  }
+  handleLogout();
+};
 
   return (
     <header className="w-full bg-white/50 py-4 px-6 shadow shadow-gray-100 sticky top-0 z-1 backdrop-blur-lg">
