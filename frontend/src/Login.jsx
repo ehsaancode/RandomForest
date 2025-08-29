@@ -20,7 +20,7 @@ const AuthPage = ({ setIsLoggedIn }) => {
       if (isAuthenticated && user?.email) {
         try {
           // Send Auth0 user info to backend for account creation
-          const res = await fetch('http://localhost:4000/api/auth/auth0', {
+          const res = await fetch(`${import.meta.env.VITE_LOCAL_URL}/api/auth/auth0`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: user.email }),
@@ -47,7 +47,7 @@ const AuthPage = ({ setIsLoggedIn }) => {
     e.preventDefault();
     setErrorMsg('');
     try {
-      const res = await fetch('http://localhost:4000/api/auth/login', {
+      const res = await fetch(`${import.meta.env.VITE_LOCAL_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -71,7 +71,7 @@ const AuthPage = ({ setIsLoggedIn }) => {
     setErrorMsg('');
     setSuccessMsg('');
     try {
-      const res = await fetch('http://localhost:4000/api/auth/register', {
+      const res = await fetch(`${import.meta.env.VITE_LOCAL_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
