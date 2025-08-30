@@ -1,6 +1,7 @@
 import React from 'react';
 import Hero from './Hero';
 
+
 const Home = () => {
   return (
     <div className='bg-linear-to-tr from-white from-70% to-pink-100 to-90% pt-16'>
@@ -76,6 +77,7 @@ const Home = () => {
       </div>
 
       <Hero />
+      
     </div>
   );
 };

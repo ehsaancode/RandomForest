@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import Preview from "./Preview";
+import StartButton from './StartButton'
 
 import "./App.css";
 import Navbar from "./Navbar";
@@ -36,6 +38,8 @@ function App() {
         <>
           <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
           <Home />
+          <StartButton />
+      <Preview />
           <Launch />
           <Footer />
         </>
